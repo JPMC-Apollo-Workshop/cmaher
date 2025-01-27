@@ -1,7 +1,10 @@
 extend schema
-  @link(
-    url: "https://specs.apollo.dev/federation/v2.8"
-    import: ["@key", "@tag", "@shareable"]
+  @link(url: "https://specs.apollo.dev/federation/v2.8", import:
+    [
+      "@key",
+      "@tag",
+      "@shareable"
+    ]
   )
 
 type Query {
@@ -30,20 +33,12 @@ type Order @key(fields: "id") {
   product and which size/color/feature was bought
   """
   items: [ProductVariant!]!
-
-  """
-  The total cost of the order
-  """
-  total: Float
-  
-  """
-  The date the oder was made
-  """
-  orderDate: String
 }
 
 type User @key(fields: "id") {
   id: ID!
+  phone: String @tag(name: "private") @shareable
+  email: String! @tag(name: "private") @shareable
 }
 
 type ProductVariant @key(fields: "id", resolvable: false) {
